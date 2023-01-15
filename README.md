@@ -1,5 +1,14 @@
-# dwin-ico-tools
-Tools to process DWIN LCD display .ICO files.
+# DWIN LCD Tools
+A fork of [dwin-ico-tools](https://github.com/b-pub/dwin-ico-tools) that 
+additionally removes the metadata from image files.
+
+## Why?
+
+A version of this/original repo is found in the Marlin (+Jyers fork) repos to process custom icons. However, there was an issue where the Ender 3 v2 finds it hard to read images with a lot of metadata that can be found in images directly exported from software such as Photoshop and Illustrator.
+Initially, to get around the issue you would have to import and export the images through a "dumb" image editing program such as MS Paint to strip the metadata. The edit is pretty simple so if you're reading this Brent, feel free to update the original repository.
+
+
+... continue original README ...
 
 ## What
 
