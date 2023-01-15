@@ -12,7 +12,7 @@ Initially, to get around the issue you would have to import and export the image
 
 ### Generate ICO file from folder
 
-Put your icon pack folder in the root of this directory, then run the below where `<FolderName>` is the name of the icon pack folder. This will generate a 9.ico file that can be moved to `DWIN_SET` on your SD card.
+Put your icon pack folder in the root of this directory, then run the below where `<FolderName>` is the name of the icon pack folder (relative to CWD). This will generate a 9.ico file that can be moved to `DWIN_SET` on your SD card.
 
 ```
 python makeIco.py <FolderName> 9.ico
