@@ -1,5 +1,6 @@
 # DWIN LCD Tools
-A fork of [dwin-ico-tools](https://github.com/b-pub/dwin-ico-tools) that 
+
+A fork of [dwin-ico-tools](https://github.com/b-pub/dwin-ico-tools) that
 additionally removes the metadata from image files.
 
 ## Why?
@@ -7,7 +8,18 @@ additionally removes the metadata from image files.
 A version of this/original repo is found in the Marlin (+Jyers fork) repos to process custom icons. However, there was an issue where the Ender 3 v2 finds it hard to read images with a lot of metadata that can be found in images directly exported from software such as Photoshop and Illustrator.
 Initially, to get around the issue you would have to import and export the images through a "dumb" image editing program such as MS Paint to strip the metadata. The edit is pretty simple so if you're reading this Brent, feel free to update the original repository.
 
- 
+## Usage
+
+### Generate ICO file from folder
+
+Put your icon pack folder in the root of this directory, then run the below where `<FolderName>` is the name of the icon pack folder. This will generate a 9.ico file that can be moved to `DWIN_SET` on your SD card.
+
+```
+python makeIco.py <FolderName> 9.ico
+```
+
+<br>
+
 ... continue original README ...
 
 ## What
@@ -54,7 +66,8 @@ header files included in Marlin 2.0.7, as of 1-oct-2020.
 ## Credits
 
 These tools were created by:
-* Brent Burton [[@b-pub](https://github.com/b-pub)]
+
+- Brent Burton [[@b-pub](https://github.com/b-pub)]
 
 ## License
 
@@ -72,8 +85,7 @@ work.
 
 The following dependencies can be installed with pip:
 
-* python3 -m pip install pillow
-
+- python3 -m pip install pillow
 
 ## Overview
 
@@ -81,9 +93,9 @@ The dwin-ico-tools process the 9.ICO firmware file. The easiest
 way to do this is to create a directory to isolate the changes,
 and make a copy of 9.ICO there:
 
-	$ mkdir hackicons
-	$ cp 9.ICO hackicons
-	$ cd hackicons
+    $ mkdir hackicons
+    $ cp 9.ICO hackicons
+    $ cd hackicons
 
 We'll use this setup for the following explanations.
 
@@ -92,7 +104,7 @@ We'll use this setup for the following explanations.
 To edit the individual icons, the archive must be split first.
 Do this with `splitIco.py`:
 
-	$ python3 splitIco.py 9.ICO icons
+    $ python3 splitIco.py 9.ICO icons
 
 The "icons" parameter is the name of a directory to create (if
 missing) and store the individual JPEG icon files. While
@@ -131,6 +143,7 @@ by `makeIco.py`:
     -rw-r--r--  1 bpub  staff  217989 Apr 15 17:35 9.ICO
     -rw-r--r--  1 bpub  staff  217989 Apr 15 18:15 test.ICO
     $
+
 The generated output, test.ICO, is the same size in this example
 and should not be a problem.
 
