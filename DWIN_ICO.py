@@ -144,11 +144,11 @@ class DWIN_ICO_File():
         print('Scanning icon directory', iconDir)
         count = 0
         for dirEntry in os.scandir(iconDir):
-            if dirEntry.name == "0_start.jpg":
-                print("...Ignoring start image")
+            if dirEntry.name in ["0_start.jpg", "1_English.jpg", "2_Chinese.jpg"]:
+                print(f"...Ignoring {dirEntry.name}")
                 continue
             if not dirEntry.is_file() or not dirEntry.name.endswith(".jpg"):
-                print('...Ignoring', dirEntry.path)
+                print(f"...Ignoring {dirEntry.name}")
                 continue
             # process each file:
             try:
@@ -172,7 +172,7 @@ class DWIN_ICO_File():
         print('...Scanned %d icon files' % (count))
 
         # 2. Strip EXIF data
-        self._fixMetadata()
+        self._fixMetadata(iconDir)
 
         # 3. Scan over valid header entries and update offsets
         self._updateHeaderOffsets()
@@ -181,26 +181,37 @@ class DWIN_ICO_File():
         self._combineAndWriteIcoFile(filename)
         print('Successfully wrote ICO file. %d icons were included.' % (count))
 
-    def _fixMetadata(self):
+    def _fixMetadata(self, iconDir):
         """Iterate over all the image files and remove the EXIF data within"""
+        c = 0
         for i in range(0, 256):
             e = self.entries[i]
             if e.length == 0:
                 continue
             try:
                 img = Image.open(e.filename)
-                data = list(img.getdata())
                 ofile = Image.new(img.mode, img.size)
-                ofile.putdata(data)
+                ofile.putdata(list(img.getdata()))
                 ofile.save(e.filename)
                 # Update the image size after stripping metadata
                 e.length = os.stat(e.filename).st_size
+                c += 1
 
             except Exception as err:
                 print(f"Error when modifing EXIF data for {e.name}: ", err)
                 pass
+        print(f"...Stripped metadata from {c} icon(s)")
 
-        print("...Stripped metadata from files")
+        c = 0
+        for dirEntry in os.scandir(iconDir):
+            if dirEntry.name in ["0_start.jpg", "1_English.jpg", "2_Chinese.jpg"]:
+                img = Image.open(dirEntry.path)
+                ofile = Image.new(img.mode, img.size)
+                ofile.putdata(list(img.getdata()))
+                ofile.save(dirEntry.path)
+                c += 1
+                continue
+        print(f"...Stripped metadata from {c} boot image(s) ")
         return
 
     def _updateHeaderOffsets(self):
