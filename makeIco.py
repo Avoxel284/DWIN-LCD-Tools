@@ -16,7 +16,7 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#----------------------------------------------------------------
+# ----------------------------------------------------------------
 
 import os
 import os.path
@@ -25,10 +25,11 @@ import DWIN_ICO
 
 version = '2.0.7'
 
-#----------------
+# ----------------
 if __name__ == '__main__':
     try:
-        parser = argparse.ArgumentParser(description='Make .ico from JPEG files')
+        parser = argparse.ArgumentParser(
+            description='Make .ico from JPEG files')
         parser.add_argument('iconDir', type=str, nargs=1,
                             help='name of directory containing icon JPGs')
         parser.add_argument('filename', type=str, nargs=1,
@@ -39,15 +40,18 @@ if __name__ == '__main__':
         iconDir = args.iconDir[0]
 
         if os.path.isfile(filename):
-            raise RuntimeError("ICO file '%s' already exists." % (filename))
+            if input(f"ICO file '{filename}' already exists. Overwrite? (y/N)") != "y":
+                print("Cancelling")
+                exit()
 
         if not os.path.exists(iconDir):
-            raise RuntimeError("Icon directory '%s' doesn't exist." % (iconDir))
+            raise RuntimeError(
+                "Icon directory '%s' doesn't exist." % (iconDir))
 
-        print("Making .ico file '%s' from contents of '%s'" % (filename, iconDir))
+        print("Making .ico file '%s' from contents of '%s'" %
+              (filename, iconDir))
         ico = DWIN_ICO.DWIN_ICO_File()
         ico.createFile(iconDir, filename)
 
     except Exception as e:
         print('Error: ', e)
-

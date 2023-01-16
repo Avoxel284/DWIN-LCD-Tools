@@ -22,6 +22,7 @@ Next, locate this repo (cd into it) and copy the icons folder into the root. Run
 python makeIco.py <FolderName> 9.ico
 ```
 
+If you are an experienced programmer/you know what you are doing, you may try to edit the firmware files and add more icons since there are a maximum of 256 in each .ICO library.
 
 <br>
 
