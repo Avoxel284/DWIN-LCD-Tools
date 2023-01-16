@@ -40,8 +40,8 @@ if __name__ == '__main__':
         iconDir = args.iconDir[0]
 
         if os.path.isfile(filename):
-            if input(f"ICO file '{filename}' already exists. Overwrite? (y/N)") != "y":
-                print("Cancelling")
+            if input(f"ICO file '{filename}' already exists. Overwrite? (y/N) ") != "y":
+                print("Cancelling.")
                 exit()
 
         if not os.path.exists(iconDir):
