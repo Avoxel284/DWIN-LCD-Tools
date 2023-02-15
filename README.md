@@ -14,9 +14,9 @@ As an additional bonus, stripping metadata can remove a lot of bloat in the file
 
 ### Creating a custom icon set for Ender 3 v2 DWIN displays
 
-Copy a DWIN_SET (found in Marlin repo) folder to the root of an SD card (preferably 8gb) formatted with 4k allocation. Create a custom icon set in software of your choice (I use Illustrator since everything can just go on an artboard), then once all the icons are exported as JPG (quality 100 works fine since stripping the metadata takes a lot of storage away). If you are also customizing the boot screen image (0_start.jpg), you can also put this in the icons folder.
+Copy a DWIN_SET (found in Marlin repo) folder to the root of an SD card (preferably 8gb) formatted with 4k allocation. Create a custom icon set in software of your choice (I use Illustrator since everything can just go on its own artboard), then export all the icons as JPG images to the icons folder (quality 100 works fine since stripping the metadata takes a lot of storage away). If you are also customizing the boot screen image (0_start.jpg), you can also put this in the icons folder.
 
-Next, locate this repo (cd into it) and copy the icons folder into the root. Run the `makeIco.py` file with Python 3 (python 1+2 should also work), where `<FolderName>` is the name of the icons folder. You may also need to install the Pillow library (`pip install pillow`). This will generate a file called `9.ico`, which you can move to the `DWIN_SET` folder on your SD card. If you are also customizing the `0_start` image, you will need to also copy that file from **the icon folder copied to the root of this repo after running the command**.
+Next, locate this repo (cd into it) and copy the icons folder into the root. Run the below command (all Python versions should work), where `<FolderName>` is the name of the icons folder. You may also need to install the Pillow library (`pip install pillow`). This will generate a file called `9.ico`, which you can move to the `DWIN_SET` folder on your SD card. If you are also customizing the `0_start` image, you will need to also copy that file from **the icon folder copied to the root of this repo after running the command**.
 
 ```
 python makeIco.py <FolderName> 9.ico
